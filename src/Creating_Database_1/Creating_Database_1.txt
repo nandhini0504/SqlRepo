@@ -1,0 +1,54 @@
+create database School
+use School
+
+--creating a table named locati
+
+Create table Locations
+(country_id varchar(50) NOT NULL,
+country_name varchar(50),
+region_id varchar(30) NOT NULL
+);
+-- renaming the table from locations to locations_new
+
+EXEC sp_rename  'Locations' ,'Locations_new';
+
+-- getting all the records from the table
+select * from Locations_new;
+
+-- adding new column named region_name
+alter table Locations_new add region_name VARCHAR(50);
+
+-- adding new column named ID
+ALTER TABLE Locations_new
+ADD ID INT;
+
+-- add a column state_province after region_id to the table
+
+-- checking for the details of the column
+EXEC sp_help 'Locations_new';
+
+--ALTER TABLE Locations_new (this syntax is not correct)
+--ADD state_province AFTER region_id;
+
+--to add a column state_province after region_id to the table locations we have to create temporary table
+
+CREATE TABLE Locations_Newtemp (
+    country_id VARCHAR(50),
+    country_name VARCHAR(50),
+    region_id VARCHAR(50),
+	state_province VARCHAR(50),
+    ID int
+);
+
+
+INSERT INTO Locations_Newtemp(country_id,country_name,region_id,state_province,ID)
+SELECT country_id,country_name,region_id,state_province,ID
+FROM Locations_New;
+
+
+
+
+ select * from Locations_New;
+
+ ALTER TABLE Locations_new
+ADD State_province VARCHAR(50);
