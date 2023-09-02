@@ -1,7 +1,7 @@
 create database School
 use School
 
---creating a table named locati
+--creating a table named location
 
 Create table Locations
 (country_id varchar(50) NOT NULL,
