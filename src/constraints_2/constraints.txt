@@ -1,0 +1,87 @@
+use School -- database name
+
+-- create table with not null constraint
+CREATE TABLE Agents (
+    agent_code CHAR(6) NOT NULL,
+    agent_name CHAR(25) NOT NULL,
+    working_area CHAR(25) NOT NULL
+);
+
+-- seeing the details of the table
+EXEC sp_help Agents;
+
+-- create table with not null and unique constraint
+
+CREATE TABLE Orders (
+    ord_num DECIMAL(6) NOT NULL UNIQUE,
+    ord_amount DECIMAL(12, 2),
+    ord_date DATE NOT NULL,
+    cust_code CHAR(6) NOT NULL,
+    agent_code CHAR(6) NOT NULL
+);
+
+-- seeing the details of the table
+EXEC sp_help Orders;
+
+CREATE TABLE Agents_new (
+    agent_code CHAR(6) NOT NULL UNIQUE,
+    agent_name CHAR(25) NOT NULL UNIQUE,
+    working_area CHAR(25) NOT NULL,
+    commission DECIMAL(5, 2)
+);
+
+EXEC sp_help Agents_new;
+-- create table with not null  and columns with two constraint
+
+CREATE TABLE Customers (
+    cust_code CHAR(6) NOT NULL UNIQUE,
+    cust_name CHAR(25) NOT NULL,
+    cust_city CHAR(25) NOT NULL,
+    grade INTEGER,
+    agent_code CHAR(6) NOT NULL UNIQUE
+);
+
+
+-- create table with not null  and columns with two constraint( other syntax)
+create table Agents_new1
+(agent_code char(6) NOT NULL,
+agent_name char(25) NOT NULL,
+working_area char(25) NOT NULL
+CONSTRAINT UC UNIQUE (agent_code, agent_name));
+
+EXEC sp_help Agents_new1;
+
+-- create table with check constraint
+
+CREATE TABLE CheckConstraint (
+    agent_code CHAR(6) NOT NULL UNIQUE,
+    agent_name CHAR(25) NOT NULL UNIQUE,
+    working_area CHAR(25) NOT NULL,
+    commission INTEGER CHECK (commission < 1)
+);
+
+EXEC sp_help CheckConstraint ;
+
+-- applying check constraint on two columns using IN Operator
+
+CREATE TABLE agent_new2 (
+    agent_code CHAR(6) NOT NULL UNIQUE,
+    agent_name CHAR(25) NOT NULL UNIQUE,
+    working_area CHAR(25) NOT NULL CHECK (working_area IN ('London', 'Brisbane', 'Chennai', 'Mumbai')),
+    commission INTEGER CHECK (commission < 1)
+);
+
+EXEC sp_help agent_new2 ;
+
+-- creating table with check constraint using AND OR operator  (DOUBT)
+
+CREATE TABLE agent_new3 (
+    agent_code CHAR(6) NOT NULL UNIQUE,
+    agent_name CHAR(25) NOT NULL UNIQUE,
+    working_area CHAR(25) NULL CHECK (
+        (commission < 0.14 AND working_area = 'London') OR
+        (commission < 0.15 AND working_area = 'Mumbai') OR
+        (commission < 0.13 AND working_area = 'New York')
+    ),
+    commission DECIMAL(8, 2)
+);
