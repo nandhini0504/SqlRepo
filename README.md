@@ -63,8 +63,8 @@ Using the max and min functions to get the maximum and minimum yearly income fro
  
 ## Question 8 ##
 
-- Write a query to get FirstName in upper case as "First Name".
-- Write a query for combine FirstName and LastName and display it as "Name" 
+- to get FirstName in upper case as "First Name".
+- query for combine FirstName and LastName and display it as "Name" 
 (also include white space between first name & last name)
 - Get all employee details from EmployeeDetail table whose "FirstName" contains 'k' 
 - Get all employee details from EmployeeDetail table whose "FirstName" end with 'h' 
